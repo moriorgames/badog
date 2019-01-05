@@ -30,20 +30,6 @@ if (ANDROID)
     list(APPEND GAME_SOURCE
             proj.android/app/jni/hellocpp/main.cpp
             )
-elseif (LINUX)
-    list(APPEND GAME_SOURCE
-            proj.linux/main.cpp
-            )
-elseif (WINDOWS)
-    list(APPEND GAME_HEADER
-            proj.win32/main.h
-            proj.win32/resource.h
-            )
-    list(APPEND GAME_SOURCE
-            proj.win32/main.cpp
-            proj.win32/game.rc
-            ${common_res_files}
-            )
 elseif (APPLE)
     if (IOS)
         list(APPEND GAME_HEADER
@@ -104,10 +90,4 @@ if (APPLE)
         cocos_pak_xcode(${APP_NAME} INFO_PLIST "iOSBundleInfo.plist.in")
         set_xcode_property(${APP_NAME} ASSETCATALOG_COMPILER_APPICON_NAME "AppIcon")
     endif ()
-elseif (WINDOWS)
-    cocos_copy_target_dll(${APP_NAME} COPY_TO ${APP_RES_DIR}/..)
-endif ()
-
-if (LINUX OR WINDOWS)
-    cocos_copy_res(COPY_TO ${APP_RES_DIR} FOLDERS ${GAME_RES_FOLDER})
 endif ()
